@@ -1,3 +1,4 @@
+// #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 void GetMainLight_float(float3 WorldPos, out float3 Color, out float3 Direction, out float DistanceAtten, out float ShadowAtten) {
 #ifdef SHADERGRAPH_PREVIEW
     Direction = normalize(float3(0.5, 0.5, 0));
@@ -17,6 +18,7 @@ void GetMainLight_float(float3 WorldPos, out float3 Color, out float3 Direction,
     Color = mainLight.color;
     DistanceAtten = mainLight.distanceAttenuation;
     ShadowAtten = mainLight.shadowAttenuation;
+    
 #endif
 }
 
@@ -25,6 +27,22 @@ void ChooseColor_float(float3 Highlight, float3 Shadow, float Diffuse, float Thr
     if (Diffuse < Threshold)
     {
         OUT = Shadow;
+    }
+    else
+    {
+        OUT = Highlight;
+    }
+}
+
+void ChooseTwoColors_float(float3 Highlight, float3 Shadow, float3 Midtone, float Diffuse, float Threshold, float Threshold2, out float3 OUT)
+{
+    if (Diffuse < Threshold)
+    {
+        OUT = Shadow;
+    }
+    else if (Threshold < Diffuse && Diffuse < Threshold2)
+    {
+        OUT = Midtone;
     }
     else
     {
