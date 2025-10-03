@@ -1,3 +1,8 @@
+result:
+<img width="544" src=".\Pics\stage 1.png">
+<img width="544" src=".\Pics\stage 2.png">
+<img width="544" src=".\Pics\stage 3.png">
+
 # Lab 05 - Stylization!
 Let's practice adding stylization to a 3D scene using Unity's shader graph!
 

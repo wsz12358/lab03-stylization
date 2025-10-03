@@ -18,7 +18,17 @@ void GetMainLight_float(float3 WorldPos, out float3 Color, out float3 Direction,
     Color = mainLight.color;
     DistanceAtten = mainLight.distanceAttenuation;
     ShadowAtten = mainLight.shadowAttenuation;
+
+    int additionalLightCount = GetAdditionalLightCount();
     
+    for (int i = 0; i < additionalLightCount; i++)
+    {
+        Light light = GetAdditionalLight(i, WorldPos);
+        Direction += light.direction;
+        Color += light.color;
+        DistanceAtten += light.distanceAttenuation;
+        ShadowAtten += light.shadowAttenuation;
+    }
 #endif
 }
 
